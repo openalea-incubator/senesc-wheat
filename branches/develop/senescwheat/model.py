@@ -27,7 +27,7 @@ from __future__ import division  # use '//' to do integer division
 
 class SenescenceModel(object):
 
-    CONVERSION_FACTOR_20_TO_12 = 0.45 # modified_Arrhenius_equation(12)/modified_Arrhenius_equation(20)
+    CONVERSION_FACTOR_20_TO_12 = 0.45  # modified_Arrhenius_equation(12)/modified_Arrhenius_equation(20)
 
     N_MOLAR_MASS = 14             #: Molar mass of nitrogen (g mol-1)
     SENESCENCE_ROOTS = 0  # 3.5E-7 * CONVERSION_FACTOR_20_TO_12    #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997). TODO: should be ontogenic
@@ -98,7 +98,7 @@ class SenescenceModel(object):
 
     # Temporaire
     @classmethod
-    def calculate_relative_delta_senesced_length(cls, organ_name, prev_senesced_length,length, proteins, max_proteins, delta_t, update_max_protein):
+    def calculate_relative_delta_senesced_length(cls, organ_name, prev_senesced_length, length, proteins, max_proteins, delta_t, update_max_protein):
         """relative green_area variation due to senescence
 
         : Parameters:

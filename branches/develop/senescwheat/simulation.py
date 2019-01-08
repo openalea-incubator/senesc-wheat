@@ -98,14 +98,13 @@ class Simulation(object):
                                                   'Nstruct': roots_inputs_dict['Nstruct'] - (rate_Nstruct_death * delta_teq),  #: TODO: a faire dans une fonction a part et apres growth-wheat
                                                   'cytokinins': roots_inputs_dict['cytokinins'] - loss_cytokinins}
 
-
         # Elements
         all_elements_inputs = self.inputs['elements']
         all_elements_outputs = self.outputs['elements']
         for element_inputs_id, element_inputs_dict in all_elements_inputs.items():
 
             axe_label = element_inputs_id[1]
-            if axe_label != 'MS': # Calculation only for the main stem
+            if axe_label != 'MS':  # Calculation only for the main stem
                 continue
 
             # Temperature-compensated time (delta_teq)
@@ -118,17 +117,17 @@ class Simulation(object):
                 element_outputs_dict['green_area'] = 0.0
                 element_outputs_dict['senesced_length'] =  element_inputs_dict['length']
             else:
-                update_max_protein = forced_max_protein_elements is None or not element_inputs_id in forced_max_protein_elements
+                update_max_protein = forced_max_protein_elements is None or element_inputs_id not in forced_max_protein_elements
                 # new_green_area, relative_delta_green_area, max_proteins = model.SenescenceModel.calculate_relative_delta_green_area(element_inputs_id[3], element_inputs_dict['green_area'],
                 #                                                                                                                     element_inputs_dict['proteins'] / element_inputs_dict['mstruct'],
                 #                                                                                                                     element_inputs_dict['max_proteins'], self.delta_t, update_max_protein)
                 # Temporaire
                 new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                element_inputs_dict['senesced_length'],
-                                                                                                                                                element_inputs_dict['length'],
-                                                                                                                                                element_inputs_dict['proteins'] / element_inputs_dict['mstruct'],
-                                                                                                                                                element_inputs_dict['max_proteins'], delta_teq,
-                                                                                                                                                update_max_protein)
+                                                                                                                                                   element_inputs_dict['senesced_length'],
+                                                                                                                                                   element_inputs_dict['length'],
+                                                                                                                                                   element_inputs_dict['proteins'] / element_inputs_dict['mstruct'],
+                                                                                                                                                   element_inputs_dict['max_proteins'], delta_teq,
+                                                                                                                                                   update_max_protein)
                 # # Hack : senesence starts when sum_TT>100 for F1
                 # sum_TT = all_SAM_inputs[axe_id]['sum_TT']
                 # if element_inputs_id[:3] == (1, 'MS', 1) and sum_TT > 190 and relative_delta_senesced_length == 0:
@@ -160,7 +159,7 @@ class Simulation(object):
                 loss_cytokinins = model.SenescenceModel.calculate_remobilisation(element_inputs_dict['cytokinins'], relative_delta_green_area)
 
                 element_outputs_dict = {'green_area': new_green_area,
-                                        'senesced_length' : new_senesced_length,
+                                        'senesced_length': new_senesced_length,
                                         'mstruct': new_mstruct,
                                         'Nstruct': new_Nstruct,
                                         'starch': element_inputs_dict['starch'] - remob_starch,

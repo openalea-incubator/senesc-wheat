@@ -30,11 +30,11 @@ import pandas as pd
 SENESCWHEAT_ROOTS_INPUTS = ['sucrose', 'amino_acids', 'mstruct', 'Nstruct', 'cytokinins']
 
 #: the inputs needed by SenescWheat at SAM scale
-SENESCWHEAT_SAM_INPUTS = ['delta_teq','delta_teq_roots','sum_TT']
+SENESCWHEAT_SAM_INPUTS = ['delta_teq', 'delta_teq_roots', 'sum_TT']
 
 #: the inputs needed by SenescWheat at element scale
-SENESCWHEAT_ELEMENTS_INPUTS = ['green_area', 'senesced_length','length', 'proteins', 'mstruct', 'max_proteins', 'Nstruct', 'nitrates', 'amino_acids', 'starch', 'fructan', 'cytokinins', 'sucrose', \
-                              'is_growing']
+SENESCWHEAT_ELEMENTS_INPUTS = ['green_area', 'senesced_length', 'length', 'proteins', 'mstruct', 'max_proteins', 'Nstruct', 'nitrates', 'amino_acids', 'starch', 'fructan', 'cytokinins', 'sucrose', \
+                               'is_growing']
 
 #: the outputs computed by SenescWheat at roots scale
 SENESCWHEAT_ROOTS_OUTPUTS = ['rate_mstruct_death', 'mstruct', 'Nstruct', 'cytokinins']
@@ -43,7 +43,7 @@ SENESCWHEAT_ROOTS_OUTPUTS = ['rate_mstruct_death', 'mstruct', 'Nstruct', 'cytoki
 SENESCWHEAT_SAM_OUTPUTS = []
 
 #: the outputs computed by SenescWheat at elements scale
-SENESCWHEAT_ELEMENTS_OUTPUTS = ['senesced_length','green_area', 'mstruct', 'Nstruct', 'starch', 'sucrose', 'fructan', 'proteins', 'amino_acids', 'cytokinins']
+SENESCWHEAT_ELEMENTS_OUTPUTS = ['senesced_length', 'green_area', 'mstruct', 'Nstruct', 'starch', 'sucrose', 'fructan', 'proteins', 'amino_acids', 'cytokinins']
 
 #: the inputs and outputs of SenescWheat at roots scale
 SENESCWHEAT_ROOTS_INPUTS_OUTPUTS = sorted(list(set(SENESCWHEAT_ROOTS_INPUTS + SENESCWHEAT_ROOTS_OUTPUTS)))
