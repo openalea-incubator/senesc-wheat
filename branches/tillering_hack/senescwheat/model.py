@@ -151,7 +151,7 @@ class SenescenceModel(object):
 
         # Overwrite max proteins
         if max_proteins < proteins and update_max_protein:
-            max_proteins = min( proteins, 4000 ) #TODO : put the number as parameter
+            max_proteins = proteins
             new_senesced_length = prev_senesced_length
             relative_delta_senesced_length = 0
         # Senescence if (actual proteins/max_proteins) < fraction_N_max
