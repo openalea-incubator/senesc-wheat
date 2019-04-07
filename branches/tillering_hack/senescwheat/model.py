@@ -112,7 +112,7 @@ class SenescenceModel(object):
             new_green_area = prev_green_area
             relative_delta_green_area = 0
         # Senescence if (actual proteins/max_proteins) < fraction_N_max
-        elif (proteins / max_proteins) < fraction_N_max:
+        elif max_proteins == 0  or (proteins / max_proteins) < fraction_N_max:
             senesced_area = min(prev_green_area, cls.SENESCENCE_MAX_RATE * delta_t)
             new_green_area = max(0, prev_green_area - senesced_area)
             relative_delta_green_area = senesced_area / prev_green_area
@@ -155,7 +155,7 @@ class SenescenceModel(object):
             new_senesced_length = prev_senesced_length
             relative_delta_senesced_length = 0
         # Senescence if (actual proteins/max_proteins) < fraction_N_max
-        elif (proteins / max_proteins) < fraction_N_max:
+        elif max_proteins == 0  or (proteins / max_proteins) < fraction_N_max:
             senesced_length = cls.SENESCENCE_LENGTH_MAX_RATE * delta_t
             new_senesced_length = min(length, prev_senesced_length + senesced_length)
             if length == new_senesced_length:
