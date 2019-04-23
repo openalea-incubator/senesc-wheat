@@ -30,14 +30,14 @@ class SenescenceModel(object):
     CONVERSION_FACTOR_20_TO_12 = 0.45 # modified_Arrhenius_equation(12)/modified_Arrhenius_equation(20)
 
     N_MOLAR_MASS = 14             #: Molar mass of nitrogen (g mol-1)
-    SENESCENCE_ROOTS = 0 #3.5E-7 * CONVERSION_FACTOR_20_TO_12    #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997). TODO:
+    SENESCENCE_ROOTS = 0#3.5E-7 * CONVERSION_FACTOR_20_TO_12    #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997). TODO:
     # should be ontogenic
     # for vegetative stages, 0 in Asseng 1997, but not null in Johnson and Thornley
     FRACTION_N_MAX = {'blade': 0.5, 'stem': 0.425}  # Threshold of ([proteins]/[proteins]max) below which tissue death is triggered
     SENESCENCE_MAX_RATE = 0.2E-8 * CONVERSION_FACTOR_20_TO_12  # maximal senescence m² s-1 at 12°C (Tref)
     SENESCENCE_LENGTH_MAX_RATE = SENESCENCE_MAX_RATE / 3.5e-3  # maximal senescence m s-1 at 12°C (Tref)
-    RATIO_N_MSTRUCT = {1:0.02, 2:0.02, 3:0.02, 4:0.02, 5:0.0175, 6:0.015, 7:0.01, 8:0.005, 9:0.005, 10:0.005, 11:0.005 } # Residual Mass of N in 1 g of mstruct at full senescence of the blade (from
-    #  experiment NEMA)
+    RATIO_N_MSTRUCT = {1:0.02, 2:0.02, 3:0.02, 4:0.02, 5:0.0175, 6:0.015, 7:0.01, 8:0.005, 9:0.005, 10:0.005, 11:0.005}
+    # Residual Mass of N in 1 g of mstruct at full senescence of the blade (from experiment NEMA)
 
     @classmethod
     def calculate_N_content_total(cls, proteins, amino_acids, nitrates, Nstruct, max_mstruct, mstruct, Nresidual):
@@ -209,7 +209,7 @@ class SenescenceModel(object):
             remob_proteins = delta_aa = metabolite * relative_delta_structure
             delta_Nresidual = 0
         else:
-            if ratio_N_mstruct_max <= cls.RATIO_N_MSTRUCT[element_index]: # then all the proteins are converted into Nresidual
+            if ratio_N_mstruct_max <= cls.RATIO_N_MSTRUCT.get(element_index, 0.005): # then all the proteins are converted into Nresidual
                 remob_proteins = metabolite
                 delta_Nresidual = remob_proteins * 1E-6 * cls.N_MOLAR_MASS
                 delta_aa = 0

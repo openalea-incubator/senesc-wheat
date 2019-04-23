@@ -124,8 +124,10 @@ class Simulation(object):
                 update_max_protein = forced_max_protein_elements is None or not element_inputs_id in forced_max_protein_elements
                 # new_green_area, relative_delta_green_area, max_proteins = model.SenescenceModel.calculate_relative_delta_green_area(element_inputs_id[3], element_inputs_dict['green_area'],
                 #                                                                                                                     element_inputs_dict['proteins'] / element_inputs_dict['mstruct'],
-                #                                                                                                                     element_inputs_dict['max_proteins'], self.delta_t, update_max_protein)
-
+                #                                                                                                                     element_inputs_dict['max_proteins'], delta_teq, update_max_protein)
+                #
+                # # Temporaire
+                # new_senesced_length = element_inputs_dict['senesced_length'] * (1 - relative_delta_green_area)
 
                 # Temporaire
                 new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
