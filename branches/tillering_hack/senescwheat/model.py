@@ -30,9 +30,9 @@ class SenescenceModel(object):
     CONVERSION_FACTOR_20_TO_12 = 0.45 # modified_Arrhenius_equation(12)/modified_Arrhenius_equation(20)
 
     N_MOLAR_MASS = 14             #: Molar mass of nitrogen (g mol-1)
-    SENESCENCE_ROOTS = 0#3.5E-7 * CONVERSION_FACTOR_20_TO_12    #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997). TODO:
-    # should be ontogenic
-    # for vegetative stages, 0 in Asseng 1997, but not null in Johnson and Thornley
+    SENESCENCE_ROOTS_POSTFLO = 3.5E-7 * CONVERSION_FACTOR_20_TO_12    #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997).
+    SENESCENCE_ROOTS_PREFLO = 0
+    # TODO:should be ontogenicfor vegetative stages, 0 in Asseng 1997, but not null in Johnson and Thornley
     FRACTION_N_MAX = {'blade': 0.5, 'stem': 0.425}  # Threshold of ([proteins]/[proteins]max) below which tissue death is triggered
     SENESCENCE_MAX_RATE = 0.2E-8 * CONVERSION_FACTOR_20_TO_12  # maximal senescence m² s-1 at 12°C (Tref)
     SENESCENCE_LENGTH_MAX_RATE = SENESCENCE_MAX_RATE / 3.5e-3  # maximal senescence m s-1 at 12°C (Tref)
@@ -195,7 +195,7 @@ class SenescenceModel(object):
         return metabolite * relative_delta_structure
 
     @classmethod
-    def calculate_remobilisation_proteins(cls, organ, element_index, metabolite, relative_delta_structure, ratio_N_mstruct_max):
+    def calculate_remobilisation_proteins(cls, organ, element_index, metabolite, relative_delta_structure, ratio_N_mstruct_max, full_remob):
         """Protein remobilisation due to senescence over DELTA_T. Part is remobilized as amino_acids (µmol N), the rest is increasing Nresidual (g).
         : Parameters:
             - `relative_delta_structure` (:class:`float`) - could be relative variation of a photosynthetic element green area or relative variation of mstruct
@@ -205,7 +205,7 @@ class SenescenceModel(object):
             - Increment of Nresidual (g)
         """
 
-        if organ != 'blade':
+        if organ != 'blade' or full_remob:
             remob_proteins = delta_aa = metabolite * relative_delta_structure
             delta_Nresidual = 0
         else:
@@ -220,7 +220,7 @@ class SenescenceModel(object):
         return remob_proteins, delta_aa, delta_Nresidual
 
     @classmethod
-    def calculate_roots_senescence(cls, mstruct, Nstruct):
+    def calculate_roots_senescence(cls, mstruct, Nstruct, opt_postflo):
         """Root senescence
 
         : Parameters:
@@ -233,7 +233,11 @@ class SenescenceModel(object):
         :Returns Type:
             :class:`float`
         """
-        return mstruct * cls.SENESCENCE_ROOTS, Nstruct * cls.SENESCENCE_ROOTS
+        if opt_postflo:
+            rate_senescence = cls.SENESCENCE_ROOTS_POSTFLO
+        else :
+            rate_senescence = cls.SENESCENCE_ROOTS_PREFLO
+        return  mstruct * rate_senescence, Nstruct * rate_senescence
 
     @classmethod
     def calculate_relative_delta_mstruct_roots(cls, rate_mstruct_death, root_mstruct, delta_t):
