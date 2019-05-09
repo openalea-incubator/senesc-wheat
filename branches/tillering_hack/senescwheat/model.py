@@ -205,7 +205,7 @@ class SenescenceModel(object):
             - Increment of Nresidual (g)
         """
 
-        if organ != 'blade' or full_remob:
+        if full_remob or organ != 'blade':
             remob_proteins = delta_aa = metabolite * relative_delta_structure
             delta_Nresidual = 0
         else:

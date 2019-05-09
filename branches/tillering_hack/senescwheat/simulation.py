@@ -63,7 +63,7 @@ class Simulation(object):
         self.inputs.clear()
         self.inputs.update(inputs)
 
-    def run(self, forced_max_protein_elements=None, opt_full_remob=True, opt_postflo=False):
+    def run(self, forced_max_protein_elements=None, opt_full_remob=False, opt_postflo=False):
         """
         Compute Senesc-Wheat outputs from :attr:`inputs`, and update :attr:`outputs`.
 
@@ -76,7 +76,7 @@ class Simulation(object):
         """
 
         if opt_postflo:
-            opt_full_remob = False
+            opt_full_remob = True
 
         self.outputs.update({inputs_type: {} for inputs_type in self.inputs.keys()})
 
