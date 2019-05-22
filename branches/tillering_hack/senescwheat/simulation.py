@@ -142,45 +142,53 @@ class Simulation(object):
                                                                                                                                                     element_inputs_dict['proteins'] / element_inputs_dict['mstruct'],
                                                                                                                                                     element_inputs_dict['max_proteins'], delta_teq,
                                                                                                                                                     update_max_protein)
-                    # Hack : senesence starts when sum_TT>100 for F1
-                    sum_TT = all_SAM_inputs[axe_id]['sum_TT']
-                    if element_inputs_id[:3] == (1, 'MS', 1) and element_inputs_id[3] != 'internode' and sum_TT > 220 and relative_delta_senesced_length == 0:
+                    # Senescence with element age
+                    if  element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > 420:
                         new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
                                                                                                                                                            element_inputs_dict['senesced_length'],
                                                                                                                                                            element_inputs_dict['length'],
                                                                                                                                                            0,
                                                                                                                                                            max_proteins, delta_teq,
                                                                                                                                                            update_max_protein)
-                    if element_inputs_id[:3] == (1, 'MS', 2) and element_inputs_id[3] != 'internode' and sum_TT > 290 and relative_delta_senesced_length == 0:
-                        new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                           element_inputs_dict['senesced_length'],
-                                                                                                                                                           element_inputs_dict['length'],
-                                                                                                                                                           0,
-                                                                                                                                                           max_proteins, delta_teq,
-                                                                                                                                                           update_max_protein)
-                    if element_inputs_id[:3] == (1, 'MS', 3) and element_inputs_id[3] != 'internode' and sum_TT > 330 and relative_delta_senesced_length == 0:
-                        new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                           element_inputs_dict['senesced_length'],
-                                                                                                                                                           element_inputs_dict['length'],
-                                                                                                                                                           0,
-                                                                                                                                                           max_proteins, delta_teq,
-                                                                                                                                                           update_max_protein)
-                    if element_inputs_id[:3] == (1, 'MS', 4) and element_inputs_id[3] != 'internode' and sum_TT > 380 and relative_delta_senesced_length == 0:
-                        new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                            element_inputs_dict['senesced_length'],
-                                                                                                                                                            element_inputs_dict['length'],
-                                                                                                                                                            0,
-                                                                                                                                                            max_proteins,
-                                                                                                                                                            delta_teq,
-                                                                                                                                                            update_max_protein)
-                    if element_inputs_id[:3] == (1, 'MS', 5) and element_inputs_id[3] != 'internode' and sum_TT > 420 and relative_delta_senesced_length == 0:
-                        new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                            element_inputs_dict['senesced_length'],
-                                                                                                                                                            element_inputs_dict['length'],
-                                                                                                                                                            0,
-                                                                                                                                                            max_proteins,
-                                                                                                                                                            delta_teq,
-                                                                                                                                                            update_max_protein)
+                    # # Hack : senesence starts when sum_TT>100 for F1
+                    # sum_TT = all_SAM_inputs[axe_id]['sum_TT']
+                    # if element_inputs_id[:3] == (1, 'MS', 1) and element_inputs_id[3] != 'internode' and sum_TT > 220 and relative_delta_senesced_length == 0:
+                    #     new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
+                    #                                                                                                                                        element_inputs_dict['senesced_length'],
+                    #                                                                                                                                        element_inputs_dict['length'],
+                    #                                                                                                                                        0,
+                    #                                                                                                                                        max_proteins, delta_teq,
+                    #                                                                                                                                        update_max_protein)
+                    # if element_inputs_id[:3] == (1, 'MS', 2) and element_inputs_id[3] != 'internode' and sum_TT > 290 and relative_delta_senesced_length == 0:
+                    #     new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
+                    #                                                                                                                                        element_inputs_dict['senesced_length'],
+                    #                                                                                                                                        element_inputs_dict['length'],
+                    #                                                                                                                                        0,
+                    #                                                                                                                                        max_proteins, delta_teq,
+                    #                                                                                                                                        update_max_protein)
+                    # if element_inputs_id[:3] == (1, 'MS', 3) and element_inputs_id[3] != 'internode' and sum_TT > 330 and relative_delta_senesced_length == 0:
+                    #     new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
+                    #                                                                                                                                        element_inputs_dict['senesced_length'],
+                    #                                                                                                                                        element_inputs_dict['length'],
+                    #                                                                                                                                        0,
+                    #                                                                                                                                        max_proteins, delta_teq,
+                    #                                                                                                                                        update_max_protein)
+                    # if element_inputs_id[:3] == (1, 'MS', 4) and element_inputs_id[3] != 'internode' and sum_TT > 380 and relative_delta_senesced_length == 0:
+                    #     new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
+                    #                                                                                                                                         element_inputs_dict['senesced_length'],
+                    #                                                                                                                                         element_inputs_dict['length'],
+                    #                                                                                                                                         0,
+                    #                                                                                                                                         max_proteins,
+                    #                                                                                                                                         delta_teq,
+                    #                                                                                                                                         update_max_protein)
+                    # if element_inputs_id[:3] == (1, 'MS', 5) and element_inputs_id[3] != 'internode' and sum_TT > 420 and relative_delta_senesced_length == 0:
+                    #     new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
+                    #                                                                                                                                         element_inputs_dict['senesced_length'],
+                    #                                                                                                                                         element_inputs_dict['length'],
+                    #                                                                                                                                         0,
+                    #                                                                                                                                         max_proteins,
+                    #                                                                                                                                         delta_teq,
+                    #                                                                                                                                         update_max_protein)
                     # Temporaire :
                     relative_delta_green_area = relative_delta_senesced_length
                     new_green_area = element_inputs_dict['green_area']*(1 - relative_delta_green_area)
