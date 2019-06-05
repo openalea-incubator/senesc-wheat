@@ -132,7 +132,7 @@ class Simulation(object):
                                                                                                                                         element_inputs_dict['max_proteins'], delta_teq, update_max_protein)
 
                     # Temporaire
-                    new_senesced_length = element_inputs_dict['senesced_length'] * (1 - relative_delta_green_area)
+                    new_senesced_length =  relative_delta_green_area *(element_inputs_dict['length'] - element_inputs_dict.get('senesced_length',0))
 
                 else :
                     # Temporaire
@@ -143,7 +143,7 @@ class Simulation(object):
                                                                                                                                                     element_inputs_dict['max_proteins'], delta_teq,
                                                                                                                                                     update_max_protein)
                     # Senescence with element age
-                    if  element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > 420:
+                    if  element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > 400:
                         new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
                                                                                                                                                            element_inputs_dict['senesced_length'],
                                                                                                                                                            element_inputs_dict['length'],
