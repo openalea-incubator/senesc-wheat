@@ -42,8 +42,8 @@ setup(
     # metadata for upload to PyPI
     author = "C.Chambon, R.Barillot",
     author_email = "camille.chambon@grignon.inra.fr, romain.barillot@grignon.inra.fr",
-    description = "Model of senescence adapted to wheat ",
-    long_description = "Modèle de senescence adaptee au blé",
+    description = "Model of senescence adapted to wheat",
+    long_description = "Model of senescence adapted to wheat",
     license = "", # TODO
     keywords = "", # TODO
     url = "https://sourcesup.renater.fr/projects/senesc-wheat/",
