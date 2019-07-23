@@ -1,2 +1,2 @@
-plant,axis,metamer,organ,element,N_content_total,Nresidual,Nstruct,amino_acids,cytokinins,fructan,green_area,is_over,max_proteins,mstruct,proteins,senesced_length,starch,sucrose
-1,MS,10,blade,LeafElement1,0.03608,0.0,0.00053,6.0,3.5,0,0.00228,False,1700.0,0.05,85,0,0,90
+plant,axis,metamer,organ,element,Nresidual,Nstruct,amino_acids,cytokinins,fructan,green_area,is_growing,is_over,length,max_mstruct,max_proteins,mstruct,nitrates,proteins,senesced_length,starch,sucrose
+1,MS,10,blade,LeafElement1,0,0.00053,6,3.5,0,0.00228,True,False,0.1,0.05,85,0.05,0,85,0,0,90
