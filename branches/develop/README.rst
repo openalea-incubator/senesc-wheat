@@ -49,7 +49,7 @@ With Nose::
     
 Without Nose, install the package (see section "Installing") and run::
 
-	python test/unit/test_respiwheat.py
+    python test/unit/test_senescwheat.py
 
 
 Contact
@@ -62,6 +62,6 @@ Contributing
 ============
 
 #. Check for open issues or open a fresh issue to start a discussion around a
-   feature idea or a bug: https://sourcesup.renater.fr/tracker/?group_id=1762.
+   feature idea or a bug: https://sourcesup.renater.fr/tracker/?group_id=1792.
 #. If you feel uncomfortable or uncertain about an issue or your changes, feel
    free to email senesc-wheat@groupes.renater.fr.
