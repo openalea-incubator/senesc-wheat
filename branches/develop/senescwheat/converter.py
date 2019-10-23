@@ -72,7 +72,7 @@ def from_dataframes(roots_inputs, SAM_inputs, elements_inputs):
     :param pandas.DataFrame elements_inputs: Elements inputs dataframe to convert, with one line by element.
 
     :return: The inputs/outputs in a dictionary.
-    :rtype: dict [dict]
+    :rtype: dict [str, dict]
 
     .. seealso:: see :attr:`simulation.Simulation.inputs` and :attr:`simulation.Simulation.outputs`
        for the structure of Senesc-Wheat inputs/outputs.
