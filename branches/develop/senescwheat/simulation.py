@@ -113,7 +113,7 @@ class Simulation(object):
             # Senescence
             element_outputs_dict = element_inputs_dict.copy()
 
-            if element_inputs_dict['green_area'] < Simulation.MIN_GREEN_AREA and not element_inputs_dict['is_growing']:
+            if (element_inputs_dict['green_area'] < Simulation.MIN_GREEN_AREA and not element_inputs_dict['is_growing']) or element_inputs_dict['mstruct'] == 0:
                 element_outputs_dict['green_area'] = 0.0
                 element_outputs_dict['senesced_length'] = element_inputs_dict['length']
                 element_outputs_dict['mstruct'] = 0
