@@ -3,7 +3,7 @@
 from __future__ import division  # use "//" to do integer division
 
 import model
-
+import parameters
 """
     senescwheat.simulation
     ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,7 +139,7 @@ class Simulation(object):
                                                                                                                                                        element_inputs_dict['max_proteins'], delta_teq,
                                                                                                                                                        update_max_protein)
                     # Senescence with element age
-                    if element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > model.SenescenceModel.AGE_EFFECT_SENESCENCE:
+                    if element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > parameters.AGE_EFFECT_SENESCENCE:
                         new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
                                                                                                                                                            element_inputs_dict['senesced_length'],
                                                                                                                                                            element_inputs_dict['length'],
