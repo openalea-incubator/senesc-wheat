@@ -1,4 +1,10 @@
 # -*- coding: latin-1 -*-
+import ez_setup
+import sys
+from setuptools import setup, find_packages
+
+import senescwheat
+
 """
 Notes:
 
@@ -16,13 +22,7 @@ Notes:
         $Id$
 """
 
-import ez_setup
 ez_setup.use_setuptools()
-
-import sys
-from setuptools import setup, find_packages
-
-import senescwheat
 
 if sys.version_info < (2, 7):
     print('ERROR: Senesc-Wheat requires at least Python 2.7 to run.')
@@ -32,20 +32,20 @@ if sys.version_info >= (3, 0):
     print('WARNING: Senesc-Wheat has not been tested with Python 3.')
 
 setup(
-    name = "Senesc-Wheat",
+    name="Senesc-Wheat",
     version=senescwheat.__version__,
-    packages = find_packages(),
+    packages=find_packages(),
 
-    install_requires = ['pandas>=0.18.0'],
-    include_package_data = True,
+    install_requires=['pandas>=0.18.0'],
+    include_package_data=True,
 
     # metadata for upload to PyPI
-    author = "C.Chambon, R.Barillot",
-    author_email = "camille.chambon@grignon.inra.fr, romain.barillot@grignon.inra.fr",
-    description = "Model of senescence adapted to wheat ",
-    long_description = "Modèle de senescence adaptee au blé",
-    license = "", # TODO
-    keywords = "", # TODO
-    url = "https://sourcesup.renater.fr/projects/senesc-wheat/",
-    download_url = "", # TODO
+    author="M.Gauthier, C.Chambon, R.Barillot",
+    author_email="camille.chambon@inra.fr, romain.barillot@inra.fr",
+    description="Model of senescence adapted to wheat",
+    long_description="Model of senescence adapted to wheat",
+    license="CeCILL-C",
+    keywords="senescence, tissue death, trophic regulation, green area, leaf, roots, nitrogen, remobilisation",
+    url="https://sourcesup.renater.fr/projects/senesc-wheat/",
+    download_url="https://sourcesup.renater.fr/frs/download.php/latestfile/1923/senesc-wheat_BreedWheat.zip",
 )
