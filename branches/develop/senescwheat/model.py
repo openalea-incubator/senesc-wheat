@@ -1,6 +1,7 @@
 # -*- coding: latin-1 -*-
 
 from __future__ import division  # use '//' to do integer division
+import parameters
 
 """
     senescwheat.model
@@ -24,20 +25,6 @@ from __future__ import division  # use '//' to do integer division
 
 
 class SenescenceModel(object):
-    CONVERSION_FACTOR_20_TO_12 = 0.45  # modified_Arrhenius_equation(12)/modified_Arrhenius_equation(20)
-
-    N_MOLAR_MASS = 14  #: Molar mass of nitrogen (g mol-1)
-    SENESCENCE_ROOTS_POSTFLOWERING = 3.5E-7 * CONVERSION_FACTOR_20_TO_12  #: Rate of root turnover at 12°C (s-1). Value at 20°C coming from Johnson and Thornley (1985), see also Asseng et al. (1997).
-    SENESCENCE_ROOTS_PREFLOWERING = 0
-    # TODO: should be ontogenic for vegetative stages, 0 in Asseng 1997, but not null in Johnson and Thornley
-    FRACTION_N_MAX = {'blade': 0.5, 'stem': 0.425}  # Threshold of ([proteins]/[proteins]max) below which tissue death is triggered
-    SENESCENCE_MAX_RATE = 0.2E-8 * CONVERSION_FACTOR_20_TO_12  # maximal senescence m² s-1 at 12°C (Tref)
-    SENESCENCE_LENGTH_MAX_RATE = SENESCENCE_MAX_RATE / 3.5e-3  # maximal senescence m s-1 at 12°C (Tref)
-    RATIO_N_MSTRUCT = {1: 0.02, 2: 0.02, 3: 0.02, 4: 0.02, 5: 0.0175, 6: 0.015, 7: 0.01, 8: 0.005, 9: 0.005, 10: 0.005, 11: 0.005}  #: N content in total organ mass (senesced + green) according to phytomer rank
-    DEFAULT_RATIO_N_MSTRUCT = 0.005  #: default N content in total organ mass (senesced + green) if phytomer rank not found above
-    AGE_EFFECT_SENESCENCE = 400  #: Age-induced senescence (degree-day calculated from elong-wheat as equivalent at 12°C)
-
-    # Residual Mass of N in 1 g of mstruct at full senescence of the blade (from experiment NEMA)
 
     @classmethod
     def calculate_N_content_total(cls, proteins, amino_acids, nitrates, Nstruct, max_mstruct, mstruct, Nresidual):
@@ -54,7 +41,7 @@ class SenescenceModel(object):
         :return: N_content_total (between 0 and 1)
         :rtype: float
         """
-        return ((proteins + amino_acids + nitrates) * 1E-6 * cls.N_MOLAR_MASS + Nresidual) / max_mstruct + Nstruct / mstruct
+        return ((proteins + amino_acids + nitrates) * 1E-6 * parameters.N_MOLAR_MASS + Nresidual) / max_mstruct + Nstruct / mstruct
 
     @classmethod
     def calculate_forced_relative_delta_green_area(cls, green_area_df, group_id, prev_green_area):
@@ -89,9 +76,9 @@ class SenescenceModel(object):
         """
 
         if organ_name == 'blade':
-            fraction_N_max = cls.FRACTION_N_MAX['blade']
+            fraction_N_max = parameters.FRACTION_N_MAX['blade']
         else:
-            fraction_N_max = cls.FRACTION_N_MAX['stem']
+            fraction_N_max = parameters.FRACTION_N_MAX['stem']
 
         # Overwrite max proteins
         if max_proteins < proteins and update_max_protein:
@@ -100,7 +87,7 @@ class SenescenceModel(object):
             relative_delta_green_area = 0
         # Senescence if (actual proteins/max_proteins) < fraction_N_max
         elif max_proteins == 0 or (proteins / max_proteins) < fraction_N_max:
-            senesced_area = min(prev_green_area, cls.SENESCENCE_MAX_RATE * delta_t)
+            senesced_area = min(prev_green_area, parameters.SENESCENCE_MAX_RATE * delta_t)
             new_green_area = max(0., prev_green_area - senesced_area)
             relative_delta_green_area = senesced_area / prev_green_area
         else:
@@ -128,9 +115,9 @@ class SenescenceModel(object):
         """
 
         if organ_name == 'blade':
-            fraction_N_max = cls.FRACTION_N_MAX['blade']
+            fraction_N_max = parameters.FRACTION_N_MAX['blade']
         else:
-            fraction_N_max = cls.FRACTION_N_MAX['stem']
+            fraction_N_max = parameters.FRACTION_N_MAX['stem']
 
         # Overwrite max proteins
         if max_proteins < proteins and update_max_protein:
@@ -139,7 +126,7 @@ class SenescenceModel(object):
             relative_delta_senesced_length = 0
         # Senescence if (actual proteins/max_proteins) < fraction_N_max
         elif max_proteins == 0 or (proteins / max_proteins) < fraction_N_max:
-            senesced_length = cls.SENESCENCE_LENGTH_MAX_RATE * delta_t
+            senesced_length = parameters.SENESCENCE_LENGTH_MAX_RATE * delta_t
             new_senesced_length = min(length, prev_senesced_length + senesced_length)
             if length == new_senesced_length:
                 relative_delta_senesced_length = 1
@@ -198,14 +185,14 @@ class SenescenceModel(object):
             remob_proteins = delta_amino_acids = proteins * relative_delta_green_area
             delta_Nresidual = 0
         else:
-            if ratio_N_mstruct_max <= cls.RATIO_N_MSTRUCT.get(element_index, cls.DEFAULT_RATIO_N_MSTRUCT):  # then all the proteins are converted into Nresidual
+            if ratio_N_mstruct_max <= parameters.RATIO_N_MSTRUCT.get(element_index, parameters.DEFAULT_RATIO_N_MSTRUCT):  # then all the proteins are converted into Nresidual
                 remob_proteins = proteins
-                delta_Nresidual = remob_proteins * 1E-6 * cls.N_MOLAR_MASS
+                delta_Nresidual = remob_proteins * 1E-6 * parameters.N_MOLAR_MASS
                 delta_amino_acids = 0
             else:  # then part of the proteins are converted into amino_acids, the rest is converted into Nresidual
                 remob_proteins = proteins * relative_delta_green_area
                 delta_amino_acids = remob_proteins * 2 / 3.
-                delta_Nresidual = (remob_proteins - delta_amino_acids) * 1E-6 * cls.N_MOLAR_MASS
+                delta_Nresidual = (remob_proteins - delta_amino_acids) * 1E-6 * parameters.N_MOLAR_MASS
         return remob_proteins, delta_amino_acids, delta_Nresidual
 
     @classmethod
@@ -220,9 +207,9 @@ class SenescenceModel(object):
         :rtype: tuple [float, float]
         """
         if postflowering_stages:
-            rate_senescence = cls.SENESCENCE_ROOTS_POSTFLOWERING
+            rate_senescence = parameters.SENESCENCE_ROOTS_POSTFLOWERING
         else:
-            rate_senescence = cls.SENESCENCE_ROOTS_PREFLOWERING
+            rate_senescence = parameters.SENESCENCE_ROOTS_PREFLOWERING
         return mstruct * rate_senescence, Nstruct * rate_senescence
 
     @classmethod
@@ -238,3 +225,19 @@ class SenescenceModel(object):
         :rtype: float
         """
         return (rate_mstruct_death * delta_t) / root_mstruct
+
+    @classmethod
+    def calculate_if_element_is_over(cls, green_area, is_growing, mstruct):
+        """Define is an element is fully senescent
+
+        :param float green_area: Green area of the element (m2)
+        :param bool is_growing: flag is the element is still growing
+        :param float mstruct: Strucural mass of the element (g)
+
+        :return: is_over which indicates if the element is fully senescent
+        :rtype: bool
+        """
+        is_over = False
+        if (green_area < parameters.MIN_GREEN_AREA and not is_growing) or mstruct == 0:
+            is_over = True
+        return is_over

@@ -29,8 +29,6 @@ class Simulation(object):
     """The Simulation class permits to initialize and run a simulation.
     """
 
-    MIN_GREEN_AREA = 0.5E-8  #: Minimal green area of an element (m2). Below this area, set green_area to 0.0.
-
     def __init__(self, delta_t=1):
 
         #: The inputs of Senesc-Wheat.
@@ -113,7 +111,7 @@ class Simulation(object):
             # Senescence
             element_outputs_dict = element_inputs_dict.copy()
 
-            if (element_inputs_dict['green_area'] < Simulation.MIN_GREEN_AREA and not element_inputs_dict['is_growing']) or element_inputs_dict['mstruct'] == 0:
+            if model.SenescenceModel.calculate_if_element_is_over(element_inputs_dict['green_area'], element_inputs_dict['is_growing'],element_inputs_dict['mstruct']):
                 element_outputs_dict['green_area'] = 0.0
                 element_outputs_dict['senesced_length'] = element_inputs_dict['length']
                 element_outputs_dict['mstruct'] = 0
