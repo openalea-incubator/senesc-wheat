@@ -3,7 +3,6 @@ import os
 
 import numpy as np
 import pandas as pd
-
 from senescwheat import simulation, converter
 
 """
@@ -18,15 +17,6 @@ from senescwheat import simulation, converter
     :copyright: Copyright 2014-2015 INRA-ECOSYS, see AUTHORS.
     :license: see LICENSE for details.
 
-"""
-
-"""
-    Information about this versioned file:
-        $LastChangedBy$
-        $LastChangedDate$
-        $LastChangedRevision$
-        $URL$
-        $Id$
 """
 
 # inputs directory path
@@ -47,7 +37,6 @@ DESIRED_ELEMENTS_OUTPUTS_FILENAME = 'desired_elements_outputs.csv'
 # actual outputs filenames
 ACTUAL_ROOTS_OUTPUTS_FILENAME = 'actual_roots_outputs.csv'
 ACTUAL_ELEMENTS_OUTPUTS_FILENAME = 'actual_elements_outputs.csv'
-
 
 PRECISION = 6
 RELATIVE_TOLERANCE = 10 ** -PRECISION

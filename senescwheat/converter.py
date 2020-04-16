@@ -1,6 +1,7 @@
 # -*- coding: latin-1 -*-
 
 from __future__ import division  # use "//" to do integer division
+
 import pandas as pd
 
 """
@@ -15,15 +16,6 @@ import pandas as pd
 
 """
 
-"""
-    Information about this versioned file:
-        $LastChangedBy$
-        $LastChangedDate$
-        $LastChangedRevision$
-        $URL$
-        $Id$
-"""
-
 #: the inputs needed by SenescWheat at roots scale
 SENESCWHEAT_ROOTS_INPUTS = ['sucrose', 'amino_acids', 'mstruct', 'Nstruct', 'cytokinins']
 
@@ -31,7 +23,8 @@ SENESCWHEAT_ROOTS_INPUTS = ['sucrose', 'amino_acids', 'mstruct', 'Nstruct', 'cyt
 SENESCWHEAT_SAM_INPUTS = ['delta_teq', 'delta_teq_roots', 'sum_TT']
 
 #: the inputs needed by SenescWheat at element scale
-SENESCWHEAT_ELEMENTS_INPUTS = ['green_area', 'senesced_length_element', 'length', 'proteins', 'mstruct', 'max_proteins', 'Nstruct', 'nitrates', 'amino_acids', 'starch', 'fructan', 'cytokinins', 'sucrose',
+SENESCWHEAT_ELEMENTS_INPUTS = ['green_area', 'senesced_length_element', 'length', 'proteins', 'mstruct', 'max_proteins', 'Nstruct', 'nitrates', 'amino_acids', 'starch', 'fructan', 'cytokinins',
+                               'sucrose',
                                'is_growing', 'max_mstruct', 'Nresidual', 'age']
 
 #: the outputs computed by SenescWheat at roots scale

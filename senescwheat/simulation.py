@@ -16,15 +16,6 @@ import parameters
 
 """
 
-"""
-    Information about this versioned file:
-        $LastChangedBy$
-        $LastChangedDate$
-        $LastChangedRevision$
-        $URL$
-        $Id$
-"""
-
 
 class Simulation(object):
     """The Simulation class permits to initialize and run a simulation.
@@ -105,7 +96,6 @@ class Simulation(object):
         all_elements_outputs = self.outputs['elements']
         for element_inputs_id, element_inputs_dict in all_elements_inputs.items():
 
-
             axe_label = element_inputs_id[1]
             if axe_label != 'MS':  # Calculation only for the main stem
                 continue
@@ -117,7 +107,7 @@ class Simulation(object):
             # Senescence
             element_outputs_dict = element_inputs_dict.copy()
 
-            if model.SenescenceModel.calculate_if_element_is_over(element_inputs_dict['green_area'], element_inputs_dict['is_growing'],element_inputs_dict['mstruct']):
+            if model.SenescenceModel.calculate_if_element_is_over(element_inputs_dict['green_area'], element_inputs_dict['is_growing'], element_inputs_dict['mstruct']):
                 element_outputs_dict['green_area'] = 0.0
                 element_outputs_dict['senesced_length_element'] = element_inputs_dict['length']
                 element_outputs_dict['mstruct'] = 0
@@ -147,7 +137,8 @@ class Simulation(object):
                     # Senescence with element age
                     if element_inputs_id[3] != 'internode' and relative_delta_senesced_length == 0 and element_inputs_dict['age'] > parameters.AGE_EFFECT_SENESCENCE:
                         new_senesced_length, relative_delta_senesced_length, max_proteins = model.SenescenceModel.calculate_relative_delta_senesced_length(element_inputs_id[3],
-                                                                                                                                                           element_inputs_dict['senesced_length_element'],
+                                                                                                                                                           element_inputs_dict[
+                                                                                                                                                               'senesced_length_element'],
                                                                                                                                                            element_inputs_dict['length'],
                                                                                                                                                            0,
                                                                                                                                                            max_proteins, delta_teq,

@@ -3,7 +3,6 @@
 import os
 
 import pandas as pd
-
 from senescwheat import simulation, converter
 
 '''
@@ -23,15 +22,6 @@ from senescwheat import simulation, converter
 
 '''
 
-'''
-    Information about this versioned file:
-        $LastChangedBy$
-        $LastChangedDate$
-        $LastChangedRevision$
-        $URL$
-        $Id$
-'''
-
 # inputs paths
 INPUTS_DIRPATH = 'inputs'
 
@@ -48,9 +38,7 @@ ELEMENTS_OUTPUTS_FILENAME = 'elements_outputs.csv'
 roots_outputs_filepath = os.path.join(OUTPUTS_DIRPATH, ROOTS_OUTPUTS_FILENAME)
 elements_outputs_filepath = os.path.join(OUTPUTS_DIRPATH, ELEMENTS_OUTPUTS_FILENAME)
 
-
 if __name__ == '__main__':
-    
     # create a simulation
     simulation_ = simulation.Simulation(delta_t=3600)
     # read inputs from Pandas dataframes
@@ -67,4 +55,4 @@ if __name__ == '__main__':
     roots_outputs_df, SAM_outputs_df, elements_outputs_df = converter.to_dataframes(simulation_.outputs)
     # write the dataframes to CSV
     roots_outputs_df.to_csv(os.path.join(OUTPUTS_DIRPATH, ROOTS_OUTPUTS_FILENAME), index=False, na_rep='NA')
-    elements_outputs_df.to_csv(os.path.join(OUTPUTS_DIRPATH, ELEMENTS_OUTPUTS_FILENAME), index=False, na_rep='NA') 
+    elements_outputs_df.to_csv(os.path.join(OUTPUTS_DIRPATH, ELEMENTS_OUTPUTS_FILENAME), index=False, na_rep='NA')

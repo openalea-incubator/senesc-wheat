@@ -1,6 +1,7 @@
 # -*- coding: latin-1 -*-
 
 from __future__ import division  # use '//' to do integer division
+
 import parameters
 
 """
@@ -12,15 +13,6 @@ import parameters
     :copyright: Copyright 2014-2015 INRA-ECOSYS, see AUTHORS.
     :license: see LICENSE for details.
 
-"""
-
-"""
-    Information about this versioned file:
-        $LastChangedBy$
-        $LastChangedDate$
-        $LastChangedRevision$
-        $URL$
-        $Id$
 """
 
 
@@ -237,6 +229,6 @@ class SenescenceModel(object):
         :rtype: bool
         """
         is_over = False
-        if (green_area < parameters.MIN_GREEN_AREA or mstruct == 0) and not is_growing :
+        if (green_area < parameters.MIN_GREEN_AREA or mstruct == 0) and not is_growing:
             is_over = True
         return is_over
