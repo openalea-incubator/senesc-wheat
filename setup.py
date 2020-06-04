@@ -28,9 +28,6 @@ if sys.version_info < (2, 7):
     print('ERROR: Senesc-Wheat requires at least Python 2.7 to run.')
     sys.exit(1)
 
-if sys.version_info >= (3, 0):
-    print('WARNING: Senesc-Wheat has not been tested with Python 3.')
-
 setup(
     name="Senesc-Wheat",
     version=senescwheat.__version__,
